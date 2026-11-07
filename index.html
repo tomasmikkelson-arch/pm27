@@ -807,7 +807,7 @@ function renderPage(id){
   $("#view").innerHTML=
   '<nav class="crumbs" aria-label="Шлях"><button data-home>Пам’ятка</button>'+ic("right")+'<button data-part-go="'+p.id+'">'+p.n+". "+p.title+"</button></nav>"+
   '<div class="page-head"><span class="page-num">'+s.num+'</span><h1 class="pt" id="pt" tabindex="-1">'+s.title+"</h1></div>"+
-  '<div class="meta">'+(pg.demo?'<span class="pill warn">'+ic("info")+"Демонстраційний текст</span>":'<span class="pill">'+ic("clock")+"Актуально станом на вересень 2026</span>")+<span class="pill">'+ic("book")+"≈ "+readMin(s.text)+" хв читання</span></div>"+
+  '<div class="meta">'+(pg.demo?'<span class="pill warn">'+ic("info")+"Демонстраційний текст</span>":'<span class="pill">'+ic("clock")+"Актуально станом на вересень 2026</span>")+'<span class="pill">'+ic("book")+"≈ "+readMin(s.text)+" хв читання</span></div>"+
   (pg.demo?'<div class="demo-banner">'+ic("info")+'<span>У робочій версії тут буде повний текст підрозділу з пам’ятки. Для прототипу використано матеріал: <a href="'+pg.source.href+'" target="_blank" rel="noopener">'+pg.source.label+"</a>.</span></div>":"")+
   '<div class="tools"><button class="btn primary" id="copyLink">'+ic("link")+'<span class="lbl">Скопіювати посилання на пункт</span></button><button class="btn" data-report>'+ic("flag")+'<span class="lbl">Повідомити про неточність</span></button><div class="fsz" role="group" aria-label="Розмір тексту"><button id="fsMinus" aria-label="Зменшити текст">A−</button><span></span><button id="fsPlus" aria-label="Збільшити текст">A+</button></div></div>'+
   (h2s.length>1?'<div class="toc" aria-label="Зміст підрозділу">'+h2s.map(h=>'<button data-jump="h-'+h.id+'">'+h.x+"</button>").join("")+"</div>":"")+
