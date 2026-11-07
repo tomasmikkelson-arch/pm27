@@ -733,7 +733,7 @@ function renderTree(){
   $("#tree").innerHTML=PARTS.map(p=>{
     const ready=p.subs.filter(s=>s[3]).length;
     return '<div class="part'+(openParts.has(p.id)?' open':'')+'" data-part="'+p.id+'">'+
-     '<button class="part-btn" aria-expanded="'+openParts.has(p.id)+'" aria-controls="subs-'+p.id+'"><span class="roman">'+p.n+'</span><span class="part-title">'+shy(p.title)+'<span class="part-meta">'+p.subs.length+' підрозділів · '+p.pages+'</span></span>'+ic("chev","chev")+'</button>'+
+     '<button class="part-btn" aria-expanded="'+openParts.has(p.id)+'" aria-controls="subs-'+p.id+'"><span class="roman">'+p.n+'</span><span class="part-title">'+shy(p.title)+'<span class="part-meta">'+p.subs.length+' підрозділів</span></span>'+ic("chev","chev")+'</button>'+
      '<ul class="subs" id="subs-'+p.id+'">'+p.subs.map(s=>{
        const id=s[3];
        if(id){const demo=PAGES[id].demo;return '<li><button class="sub" data-go="'+id+'"'+(cur===id?' aria-current="page"':'')+'><span class="num">'+s[0]+'</span><span>'+s[1]+'</span>'+(demo?'<span class="demo">Демо</span>':'')+'</button></li>';}
@@ -786,12 +786,12 @@ function currentId(){const h=decodeURIComponent(location.hash.replace(/^#/,""));
 function readMin(t){return Math.max(1,Math.round(t.split(/\s+/).length/170));}
 function renderHome(){
   document.title="Пам’ятка онлайн";
-  const pc=PARTS.map(p=>{const ready=p.subs.filter(s=>s[3]).length;return '<button class="pcard" data-part-go="'+p.id+'"><div class="pcard-top"><span class="roman">'+p.n+'</span><div><h3>'+shy(p.title)+'</h3><div class="pages">'+p.subs.length+' підрозділів · '+p.pages+'</div></div></div><div class="bar2"><i style="width:'+Math.round(ready/p.subs.length*100)+'%"></i></div><div class="ready"><span>Відкрито в прототипі</span><b>'+ready+' з '+p.subs.length+'</b></div></button>';}).join("");
+  const pc=PARTS.map(p=>{const ready=p.subs.filter(s=>s[3]).length;return '<button class="pcard" data-part-go="'+p.id+'"><div class="pcard-top"><span class="roman">'+p.n+'</span><div><h3>'+shy(p.title)+'</h3><div class="pages">'+p.subs.length+' підрозділів</div></div></div><div class="bar2"><i style="width:'+Math.round(ready/p.subs.length*100)+'%"></i></div><div class="ready"><span>Відкрито в прототипі</span><b>'+ready+' з '+p.subs.length+'</b></div></button>';}).join("");
   $("#view").innerHTML=
   '<section class="hero"><div class="yu-clip" aria-hidden="true"><svg class="yu" viewBox="0 0 780 463" aria-hidden="true"><g fill="none" stroke="#FFFFFF" stroke-width="4"><rect x="2" y="2" width="68.6" height="460"/><circle cx="328.6" cy="231" r="224.2"/><circle cx="328.6" cy="231" r="155.5"/><path d="M554.3,6.8 V75.8 A155.3,155.3 0 0 1 554.3,386.4 V456.8 A224.2,224.2 0 0 0 554.3,6.8 Z"/></g></svg></div>'+
   '<span class="eyebrow">Зміни станом на вересень 2026 року</span><h1>Пам’ятка учасникам російсько-української війни</h1><p>Права, обов’язки та гарантії соціального захисту. Знайдіть свій розділ або введіть слово в пошук.</p>'+
   '<div class="hero-search search" id="heroSearch"><div class="search-field">'+ic("search")+'<label class="sr" for="hq">Пошук по пам’ятці</label><input id="hq" type="search" autocomplete="off" placeholder="Наприклад: повістка, резерв, компенсація житла" aria-controls="hqResults" aria-expanded="false"></div><div class="results" id="hqResults" role="listbox" aria-label="Результати пошуку" hidden></div></div></section>'+
-  '<h2 class="sec-title">Розділи пам’ятки<small>для військовозобов’язаних, резервістів, військових і ветеранів</small></h2><div class="parts">'+pc+'</div>'+
+  '<h2 class="sec-title">Розділи пам’ятки</h2><div class="parts">'+pc+'</div>'+
   '<h2 class="sec-title">Відкрито в прототипі</h2><div class="quick">'+ACTIVE.map(s=>'<button class="qbtn" data-go="'+s.id+'"><b>'+s.num+'</b>'+s.title+'</button>').join("")+'</div>'+
   '<div class="help"><div class="card"><h3>Безоплатна гаряча лінія</h3><div class="phone">0 800 308 100</div><p class="muted">Для військових, ветеранів і членів їхніх родин. Консультації з понеділка по суботу, з 09:00 до 20:00.</p><div><button class="btn" id="copyPhone">'+ic("copy")+'Скопіювати номер</button></div></div>'+
   '<div class="card"><h3>Знайшли неточність?</h3><p class="muted">Закони змінюються часто. Напишіть, що саме застаріло, і юристи оновлять текст без нового випуску PDF.</p><div><button class="btn" data-report>'+ic("flag")+'Повідомити про неточність</button></div></div></div>'+
@@ -807,7 +807,7 @@ function renderPage(id){
   $("#view").innerHTML=
   '<nav class="crumbs" aria-label="Шлях"><button data-home>Пам’ятка</button>'+ic("right")+'<button data-part-go="'+p.id+'">'+p.n+". "+p.title+"</button></nav>"+
   '<div class="page-head"><span class="page-num">'+s.num+'</span><h1 class="pt" id="pt" tabindex="-1">'+s.title+"</h1></div>"+
-  '<div class="meta">'+(pg.demo?'<span class="pill warn">'+ic("info")+"Демонстраційний текст</span>":'<span class="pill">'+ic("clock")+"Актуально станом на вересень 2026</span>")+'<span class="pill">'+ic("doc")+"У PDF: с. "+s.pages+'</span><span class="pill">'+ic("book")+"≈ "+readMin(s.text)+" хв читання</span></div>"+
+  '<div class="meta">'+(pg.demo?'<span class="pill warn">'+ic("info")+"Демонстраційний текст</span>":'<span class="pill">'+ic("clock")+"Актуально станом на вересень 2026</span>")+<span class="pill">'+ic("book")+"≈ "+readMin(s.text)+" хв читання</span></div>"+
   (pg.demo?'<div class="demo-banner">'+ic("info")+'<span>У робочій версії тут буде повний текст підрозділу з пам’ятки. Для прототипу використано матеріал: <a href="'+pg.source.href+'" target="_blank" rel="noopener">'+pg.source.label+"</a>.</span></div>":"")+
   '<div class="tools"><button class="btn primary" id="copyLink">'+ic("link")+'<span class="lbl">Скопіювати посилання на пункт</span></button><button class="btn" data-report>'+ic("flag")+'<span class="lbl">Повідомити про неточність</span></button><div class="fsz" role="group" aria-label="Розмір тексту"><button id="fsMinus" aria-label="Зменшити текст">A−</button><span></span><button id="fsPlus" aria-label="Збільшити текст">A+</button></div></div>'+
   (h2s.length>1?'<div class="toc" aria-label="Зміст підрозділу">'+h2s.map(h=>'<button data-jump="h-'+h.id+'">'+h.x+"</button>").join("")+"</div>":"")+
