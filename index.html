@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <meta name="description" content="Пам’ятка учасникам російсько-української війни від ГО «Юридична сотня». Онлайн-прототип.">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Пам’ятка онлайн</title>
@@ -20,20 +21,9 @@
   --lock:#8A99A6; --mark:#FFE58F; --scrim:rgba(20,40,56,.42); --shadow:rgba(36,90,124,.14);
   --font-display:"e-Ukraine Head","Geologica",system-ui,sans-serif;
   --font-body:"Geologica",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --bar-h:64px; --fs:1;
+  --bar-h:64px; --fs:1; --gut:min(150px,9vw);
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --brand:#2D6489; --brand-deep:#6FAEDC; --ink-accent:#9FD0F2;
-  --bg:#0F1A22; --surface:#15232E; --soft:#1A2D3B; --soft-2:#1F3647; --line:#2A4557;
-  --fg:#E4EEF5; --muted:#9BB0BF; --on-brand:#FFFFFF;
-  --gold:#FFCF47; --warn-bg:#33290E; --warn-line:#8C6B10; --warn-icon:#F0C64A; --warn-fg:#F3DC9A;
-  --lock:#6A7F8E; --mark:#7A6213; --scrim:rgba(0,0,0,.55); --shadow:rgba(0,0,0,.35); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --brand:#2D6489; --brand-deep:#6FAEDC; --ink-accent:#9FD0F2;
-  --bg:#0F1A22; --surface:#15232E; --soft:#1A2D3B; --soft-2:#1F3647; --line:#2A4557;
-  --fg:#E4EEF5; --muted:#9BB0BF; --on-brand:#FFFFFF;
-  --gold:#FFCF47; --warn-bg:#33290E; --warn-line:#8C6B10; --warn-icon:#F0C64A; --warn-fg:#F3DC9A;
-  --lock:#6A7F8E; --mark:#7A6213; --scrim:rgba(0,0,0,.55); --shadow:rgba(0,0,0,.35); color-scheme:dark}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -48,16 +38,16 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 
 /* top bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--brand);color:var(--on-brand)}
-.bar-in{height:var(--bar-h);display:flex;align-items:center;gap:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{height:var(--bar-h);display:flex;align-items:center;gap:20px;padding-left:max(16px,env(safe-area-inset-left,0px),var(--gut));padding-right:max(16px,env(safe-area-inset-right,0px),var(--gut))}
 .iconbtn{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:12px;border:0;background:transparent;color:inherit;cursor:pointer}
 .iconbtn:hover{background:rgba(255,255,255,.16)}
 .burger{display:none}
-.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;min-width:0}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;flex:none}
 .brand svg{height:34px;width:auto;flex:none}
 .brand-sep{width:1.5px;height:30px;background:rgba(255,255,255,.55)}
 .brand-name{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:.2px;white-space:nowrap}
 .proto{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;background:var(--gold);color:#1F2A33;padding:3px 9px;border-radius:20px;white-space:nowrap}
-.search{position:relative;flex:1;max-width:560px;margin-left:auto}
+.search{position:relative;flex:1;min-width:0;max-width:440px;margin-left:auto}
 .search-field{display:flex;align-items:center;gap:10px;height:44px;padding:0 8px 0 14px;background:var(--surface);color:var(--fg);border-radius:24px;border:1.5px solid transparent}
 .search-field:focus-within{border-color:var(--gold)}
 .search-field svg{color:var(--brand-deep)}
@@ -80,7 +70,7 @@ mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 2px}
 .res-empty{padding:18px 12px;color:var(--muted);font-size:15px}
 
 /* shell */
-.shell{display:grid;grid-template-columns:minmax(290px,30%) minmax(0,1fr);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.shell{display:grid;grid-template-columns:minmax(290px,30%) minmax(0,1fr);padding-left:max(16px,env(safe-area-inset-left,0px),var(--gut));padding-right:max(16px,env(safe-area-inset-right,0px),var(--gut))}
 .side{position:sticky;top:calc(var(--bar-h) + env(safe-area-inset-top,0px));align-self:start;height:calc(100dvh - var(--bar-h) - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow:auto;border-right:1.5px solid var(--line);padding:24px 22px 32px 8px;overscroll-behavior:contain}
 .side-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px 10px}
 .side-close{display:none}
@@ -277,7 +267,9 @@ dialog::backdrop{background:var(--scrim)}
 .err{color:#B23A2E;font-size:13px;font-weight:400}
 
 /* responsive */
-@media (max-width:1180px){.hotline span.lbl{display:none}}
+@media (max-width:1280px){.hotline span.lbl{display:none}}
+@media (max-width:1100px){.proto{display:none}.kbd{display:none}}
+@media (max-width:720px){:root{--gut:16px}}
 @media (max-width:960px){
   .burger{display:inline-grid}
   .shell{grid-template-columns:minmax(0,1fr)}
@@ -335,7 +327,7 @@ dialog::backdrop{background:var(--scrim)}
       <div class="search-field">
         <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>
         <label class="sr" for="q">Пошук по пам’ятці</label>
-        <input id="q" type="search" autocomplete="off" placeholder="Пошук по пам’ятці, наприклад «відстрочка»" aria-controls="qResults" aria-expanded="false">
+        <input id="q" type="search" autocomplete="off" placeholder="Пошук по пам’ятці" aria-controls="qResults" aria-expanded="false">
         <span class="kbd" aria-hidden="true">/</span>
         <button class="iconbtn search-close" id="searchClose" aria-label="Закрити пошук" hidden><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
       </div>
